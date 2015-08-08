@@ -80,6 +80,7 @@ public class SMPSOTesis_main {
         algoritmo.setInputParameter("tamañoEnjambre", cantidadParticulas);//tamaño del enjambre
         algoritmo.setInputParameter("tamañoLideres", cantidadLideres);//tamaño del archivo de lideres
         algoritmo.setInputParameter("maximoIteraciones", cantidadIteraciones);//maximo de iteraciones
+        
         HashMap parameters = new HashMap();//Operator parameters
         parameters.put("probability", 1.0 / problema.getNumberOfVariables());//para mutacion
         parameters.put("distributionIndex", 20.0);//para mutacion
