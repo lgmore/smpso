@@ -5,30 +5,31 @@ import jmetal.util.Configuration;
 import jmetal.util.JMException;
 import jmetal.util.PseudoRandom;
 
-public class Real extends Variable{
+public class Real extends Variable {
 
     private double value_;//Stores the value of the real encodings.variable
     private double lowerBound_;//Stores the lower bound of the real encodings.variable
     private double upperBound_;//Stores the upper bound of the real encodings.variable
 
-    public Real() {}
-
-    public Real(double lowerBound, double upperBound){
-        lowerBound_ = lowerBound;
-        upperBound_ = upperBound;
-        value_ = PseudoRandom.randDouble()*(upperBound-lowerBound)+lowerBound;        
+    public Real() {
     }
 
-    public Real(double lowerBound, double upperBound, double value){
+    public Real(double lowerBound, double upperBound) {
+        lowerBound_ = lowerBound;
+        upperBound_ = upperBound;
+        value_ = PseudoRandom.randDouble() * (upperBound - lowerBound) + lowerBound;
+    }
+
+    public Real(double lowerBound, double upperBound, double value) {
         lowerBound_ = lowerBound;
         upperBound_ = upperBound;
         value_ = value;
     }
 
-    public Real(Variable variable) throws JMException{
+    public Real(Variable variable) throws JMException {
         lowerBound_ = variable.getLowerBound();
         upperBound_ = variable.getUpperBound();
-        value_ = variable.getValue();        
+        value_ = variable.getValue();
     }
 
     public double getValue() {
@@ -39,7 +40,7 @@ public class Real extends Variable{
         value_ = value;
     }
 
-    public Variable deepCopy(){
+    public Variable deepCopy() {
         try {
             return new Real(this);
         } catch (JMException e) {
@@ -56,7 +57,7 @@ public class Real extends Variable{
         return upperBound_;
     }
 
-    public void setLowerBound(double lowerBound)  {
+    public void setLowerBound(double lowerBound) {
         lowerBound_ = lowerBound;
     }
 
@@ -64,7 +65,7 @@ public class Real extends Variable{
         upperBound_ = upperBound;
     }
 
-    public String toString(){
-        return value_+"";
+    public String toString() {
+        return value_ + "";
     }
 }

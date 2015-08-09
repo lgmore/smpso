@@ -4,9 +4,9 @@ clc;
 close all
 I = imread(img); 
 % mejora de contraste local
-tic
+%tic
 disp(strcat('-----test mejora de contraste local-----'));
 [e, c] = mclV2(I, getElemento(type, dim), n , m, alfa);
-toc
+%toc
 disp(strcat('-----test mejora de contraste local-----'));
 

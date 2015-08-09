@@ -6,7 +6,7 @@ import jmetal.util.JMException;
 import jmetal.util.PseudoRandom;
 
 public class Int extends Variable {
-	
+
     private int value_;
     private int lowerBound_;
     private int upperBound_;
@@ -17,7 +17,7 @@ public class Int extends Variable {
         value_ = 0;
     }
 
-    public Int(int lowerBound, int upperBound){
+    public Int(int lowerBound, int upperBound) {
         lowerBound_ = lowerBound;
         upperBound_ = upperBound;
         value_ = PseudoRandom.randInt(lowerBound, upperBound);
@@ -30,10 +30,10 @@ public class Int extends Variable {
         upperBound_ = upperBound;
     }
 
-    public Int(Variable variable) throws JMException{
-        lowerBound_ = (int)variable.getLowerBound();
-        upperBound_ = (int)variable.getUpperBound();
-        value_ = (int)variable.getValue();        
+    public Int(Variable variable) throws JMException {
+        lowerBound_ = (int) variable.getLowerBound();
+        upperBound_ = (int) variable.getUpperBound();
+        value_ = (int) variable.getValue();
     }
 
     public double getValue() {
@@ -41,10 +41,10 @@ public class Int extends Variable {
     }
 
     public void setValue(double value) {
-        value_ = (int)value;
+        value_ = (int) value;
     }
 
-    public Variable deepCopy(){
+    public Variable deepCopy() {
         try {
             return new Int(this);
         } catch (JMException e) {
@@ -61,15 +61,15 @@ public class Int extends Variable {
         return upperBound_;
     }
 
-    public void setLowerBound(double lowerBound)  {
-        lowerBound_ = (int)lowerBound;
+    public void setLowerBound(double lowerBound) {
+        lowerBound_ = (int) lowerBound;
     }
 
     public void setUpperBound(double upperBound) {
-        upperBound_ = (int)upperBound;
+        upperBound_ = (int) upperBound;
     }
 
-    public String toString(){
-        return value_+"";
+    public String toString() {
+        return value_ + "";
     }
 }

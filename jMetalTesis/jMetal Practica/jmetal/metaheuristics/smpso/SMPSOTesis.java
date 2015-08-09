@@ -1,6 +1,5 @@
 package jmetal.metaheuristics.smpso;
 
-import java.io.FileInputStream;
 import jmetal.core.*;
 import jmetal.util.Distance;
 import jmetal.util.JMException;
@@ -10,18 +9,16 @@ import jmetal.util.comparators.CrowdingDistanceComparator;
 import jmetal.util.comparators.DominanceComparator;
 import jmetal.util.wrapper.XReal;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabProxy;
 import matlabcontrol.MatlabProxyFactory;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
 
 public class SMPSOTesis extends Algorithm {
+
+    private static final Logger log = Logger.getLogger(SMPSOTesis.class.getName());
 
     private int tamanhoEnjambre;//numero de particulas usadas
     private int tamanhoLideres;//tamaño maximo del archivo
@@ -52,42 +49,7 @@ public class SMPSOTesis extends Algorithm {
     boolean exito;//bandera de exito del algoritmo
     public static MatlabProxyFactory factory;
     public static MatlabProxy proxy;
-    private static String nombreImagen;
-    private static final Logger log = Logger.getLogger(SMPSOTesis.class.getName());
-            
 
-        static {
-
-        Properties prop = new Properties();
-        InputStream input = null;
-        PropertyConfigurator.configure("logger.properties");
-
-        try {
-
-            input = new FileInputStream("algoritmo.properties");
-
-            // load a properties file
-            prop.load(input);
-
-            // get the property value and print it out
-            nombreImagen=prop.getProperty("algoritmo.nombreimagen");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            System.exit(-1);
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-    
-    
     
     public SMPSOTesis(Problem problema) {
         super(problema);
@@ -122,16 +84,15 @@ public class SMPSOTesis extends Algorithm {
         matrizVelocidad = new double[tamanhoEnjambre][problem_.getNumberOfVariables()];//matriz de velocidad de las particulas
         velocidadMaxima = new double[problem_.getNumberOfVariables()];//maximo de velocidad
         velocidadMinima = new double[problem_.getNumberOfVariables()];//minimo de velocidad
-        velocidadMaxima[0] = (problem_.getUpperLimit(0) - problem_.getLowerLimit(0)) / 2;
+        velocidadMaxima[0] = (problem_.getUpperLimit(0) - problem_.getLowerLimit(0)) / 2.0;
         velocidadMinima[0] = -velocidadMaxima[0];
-        velocidadMaxima[1] = (problem_.getUpperLimit(1) - problem_.getLowerLimit(1)) / 2;
+        velocidadMaxima[1] = (problem_.getUpperLimit(1) - problem_.getLowerLimit(1)) / 2.0;
         velocidadMinima[1] = -velocidadMaxima[1];
         velocidadMaxima[2] = (problem_.getUpperLimit(2) - problem_.getLowerLimit(2)) / 2.0;
         velocidadMinima[2] = -velocidadMaxima[2];
         velocidadMaxima[3] = (problem_.getUpperLimit(3) - problem_.getLowerLimit(3)) / 2.0;
         velocidadMinima[3] = -velocidadMaxima[3];
-        velocidadMaxima[4] = (problem_.getUpperLimit(4) - problem_.getLowerLimit(4)) / 2.0;
-        velocidadMinima[4] = -velocidadMaxima[4];
+
         factory = new MatlabProxyFactory();
         proxy = factory.getProxy();
     }
@@ -196,7 +157,7 @@ public class SMPSOTesis extends Algorithm {
             matrizVelocidad[i][1] = (int) restringirVelocidad(restringirAceleracion(C1, C2) * (factorInercia(numeroIteracion, maximoIteraciones, wmax, wmin) * matrizVelocidad[i][1] + C1 * r1 * (mejorLocal.getValue(1) - particula.getValue(1)) + C2 * r2 * (mejorGlobal.getValue(1) - particula.getValue(1))), velocidadMaxima, velocidadMinima, 1, i);
             matrizVelocidad[i][2] = restringirVelocidad(restringirAceleracion(C1, C2) * (factorInercia(numeroIteracion, maximoIteraciones, wmax, wmin) * matrizVelocidad[i][2] + C1 * r1 * (mejorLocal.getValue(2) - particula.getValue(2)) + C2 * r2 * (mejorGlobal.getValue(2) - particula.getValue(2))), velocidadMaxima, velocidadMinima, 2, i);
             matrizVelocidad[i][3] = restringirVelocidad(restringirAceleracion(C1, C2) * (factorInercia(numeroIteracion, maximoIteraciones, wmax, wmin) * matrizVelocidad[i][3] + C1 * r1 * (mejorLocal.getValue(3) - particula.getValue(3)) + C2 * r2 * (mejorGlobal.getValue(3) - particula.getValue(3))), velocidadMaxima, velocidadMinima, 3, i);
-            matrizVelocidad[i][4] = restringirVelocidad(restringirAceleracion(C1, C2) * (factorInercia(numeroIteracion, maximoIteraciones, wmax, wmin) * matrizVelocidad[i][4] + C1 * r1 * (mejorLocal.getValue(4) - particula.getValue(4)) + C2 * r2 * (mejorGlobal.getValue(4) - particula.getValue(4))), velocidadMaxima, velocidadMinima, 4, i);
+            //matrizVelocidad[i][4] = restringirVelocidad(restringirAceleracion(C1, C2) * (factorInercia(numeroIteracion, maximoIteraciones, wmax, wmin) * matrizVelocidad[i][4] + C1 * r1 * (mejorLocal.getValue(4) - particula.getValue(4)) + C2 * r2 * (mejorGlobal.getValue(4) - particula.getValue(4))), velocidadMaxima, velocidadMinima, 4, i);
         }
     }
 
@@ -229,22 +190,21 @@ public class SMPSOTesis extends Algorithm {
 
     @Override
     public SolutionSet execute() throws JMException, ClassNotFoundException {
-        
+
         try {
             iniciarParametros();
         } catch (MatlabConnectionException mce) {
-            System.err.println("Error en la conexion con el MATLAB " + mce.getMessage());
+            log.error("Error en la conexion con el MATLAB " + mce.getMessage());
             System.exit(-1);
         }
-        System.out.println("Empezó: " + Calendar.getInstance().getTime().toString());
+        log.info("Empieza: " + Calendar.getInstance().getTime().toString());
         //->Step 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
         for (int i = 0; i < tamanhoEnjambre; i++) {
             Solution particula = new Solution(problem_);//crea la particula con valores random en sus variables, del tipo de solucion de la particula, para este caso es "Real"
             problem_.evaluate(particula);//evaluacion de la particula, pondra valores en sus objetivos
             particulas.add(particula);//se añade al enjambre
-            log.info("Particula " + i + ". Entropia: " + particula.getObjective(0) + ". Contraste: " + particula.getObjective(1));
-            log.info("Particula " + i + ". var des 1: " + particula.getDecisionVariables()[0].toString() + ". var des 2: " + particula.getDecisionVariables()[1].toString() + ". var des 3: " + particula.getDecisionVariables()[2].toString()+ ". var des 4: " + particula.getDecisionVariables()[3].toString());
-            //System.out.println("Particula "+i+". Entropia*SSIM: "+particula.getObjective(0));
+            log.info("Particula [" + i + "] OBJ. Contraste: " + particula.getObjective(0) + ". Entropia: " + particula.getObjective(1));
+            log.info("Particula [" + i + "] VARDESC. n:" + particula.getDecisionVariables()[1].toString() + ", m:5, alfa:" + particula.getDecisionVariables()[3].toString() + ", type:" + particula.getDecisionVariables()[2].toString() + ", dim:" + particula.getDecisionVariables()[0].toString());
         }
         //-> Step2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
         for (int i = 0; i < tamanhoEnjambre; i++) {//por cada particula
@@ -266,11 +226,11 @@ public class SMPSOTesis extends Algorithm {
         distance_.crowdingDistanceAssignment(mejoresGlobales, problem_.getNumberOfObjectives());
         //-> Step 7. Iteraciones
         while (iteracion < maximoIteraciones) {
-            System.out.println("Iteración: " + iteracion + ", " + Calendar.getInstance().getTime().toString());
+            log.info("Particula [" + iteracion + "] " + Calendar.getInstance().getTime().toString());
             try {
                 calcularVelocidad(iteracion, maximoIteraciones);
             } catch (IOException ex) {
-                Logger.getLogger(SMPSOTesis.class.getName()).log(Level.SEVERE, null, ex);
+                log.error("Error  al calcular la velocidad");
             }
             calcularNuevasPosiciones();
             //mutar(iteracion, maximoIteraciones);
@@ -278,9 +238,8 @@ public class SMPSOTesis extends Algorithm {
             for (int i = 0; i < particulas.size(); i++) {//por cada particula
                 Solution particula = particulas.get(i);
                 problem_.evaluate(particula);//evaluar funciones del problema
-                System.out.println("Particula " + i + ". Objetivo 1: " + particula.getObjective(0) + ". Objetivo 2: " + particula.getObjective(1));
-                System.out.println("Particula " + i + ". var des 0: " + particula.getDecisionVariables()[0].toString() + ". var des 1: " + particula.getDecisionVariables()[1].toString() + ". var des 2: " + particula.getDecisionVariables()[2].toString() + ". var des 3: " + particula.getDecisionVariables()[3].toString());
-                //System.out.println("Particula "+i+". Entropia*SSIM: "+particula.getObjective(0));
+                log.info("Particula [" + i + "] OBJ. Contraste: " + particula.getObjective(0) + ". Entropia: " + particula.getObjective(1));
+                log.info("Particula [" + i + "] VARDESC. n:" + particula.getDecisionVariables()[1].toString() + ", m:5, alfa:" + particula.getDecisionVariables()[3].toString() + ", type:" + particula.getDecisionVariables()[2].toString() + ", dim:" + particula.getDecisionVariables()[0].toString());
             }
             //Actualizar el archivo de lideres no dominados, solo entran los q no son dominados, los dominados se van quitando de la lista
             for (int i = 0; i < particulas.size(); i++) {
@@ -301,17 +260,8 @@ public class SMPSOTesis extends Algorithm {
         }
         return mejoresGlobales;
     }
-    
-    public static String getNombreImagen(){
-        
-        return nombreImagen;
-    
-    }
 
-    /**
-     * @param nombreImagen the nombreImagen to set
-     */
-    public void setNombreImagen(String nombreImagen) {
-        this.nombreImagen = nombreImagen;
-    }
+    
+
+    
 }

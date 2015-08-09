@@ -18,22 +18,21 @@
 // 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package jmetal.util;
 
 import java.io.Serializable;
-
 
 /**
  * jMetal exception class
  */
 public class JMException extends Exception implements Serializable {
-  
-  /**
-   * Constructor
-   * @param Error message
-   */
-  public JMException (String message){
-     super(message);      
-  } // JmetalException
+
+    /**
+     * Constructor
+     *
+     * @param Error message
+     */
+    public JMException(String message) {
+        super(message);
+    } // JmetalException
 }

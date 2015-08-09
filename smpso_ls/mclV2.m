@@ -28,5 +28,7 @@ subplot(1,2,2)
 disp(strcat('con mejora local. entropia= ',num2str(e), ', contraste= ' , num2str(c)));
 imshow(uint8(f)); title(strcat('con mejora local. entropia=',num2str(e), ', contraste= ' , num2str(c)));
 % guarda el resultado
-saveas(figure(2),strcat('resultado',datestr(now,'mm-dd-yyyy-HHMMSS'),'.fig'));
+figuresdir = pwd; 
+saveas(figure(2), strcat(figuresdir,'/Resultados/','resultado',datestr(now,'mm-dd-yyyy-HHMMSS'),'.png'));
+disp(strcat('Fin de la ejecucion de MCL'));
 end

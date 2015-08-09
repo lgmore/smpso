@@ -1,14 +1,19 @@
 package jmetal.core;
 
-import java.beans.Statement;
-import jmetal.util.Configuration;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static jmetal.metaheuristics.smpso.SMPSOTesis_main.nombreImagen;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import jmetal.util.Configuration;
 
 public class SolutionSet implements Serializable {
 
@@ -156,19 +161,22 @@ public class SolutionSet implements Serializable {
             BufferedWriter bwP = new BufferedWriter(oswP);
             for (Solution aSolutionsList_ : solutionsList_) {
 
-                insertTableSQL = getSentenciaSQL(aSolutionsList_.getDecisionVariables()[0].toString(), //X
-                        aSolutionsList_.getDecisionVariables()[1].toString(), //Y
-                        aSolutionsList_.getDecisionVariables()[2].toString(), //CLIP
-                        aSolutionsList_.getObjective(0), //entropia
-                        aSolutionsList_.getObjective(1) //ssim
+                // int n, int m, double alfa, int type, int dim, double entropia, double contraste
+                insertTableSQL = getSentenciaSQL(
+                        aSolutionsList_.getDecisionVariables()[1].toString(), //n
+                        "5", // m
+                        aSolutionsList_.getDecisionVariables()[0].toString(), //alfa
+                        aSolutionsList_.getDecisionVariables()[2].toString(), //type
+                        aSolutionsList_.getDecisionVariables()[3].toString(), //dim
+                        aSolutionsList_.getObjective(1), //entropia
+                        aSolutionsList_.getObjective(0) //contraste
                 );
 
                 // execute insert SQL stetement
                 dbConnection = getDBConnection();
                 statement = (Statement) dbConnection.prepareStatement(insertTableSQL);
-                
-                
-                System.out.println("Record is inserted into DBUSER table!");
+
+                Configuration.logger_.info("Record is inserted into DBUSER table!");
 
                 bwE.write(String.valueOf(aSolutionsList_.getObjective(0)));
                 bwS.write(String.valueOf(aSolutionsList_.getObjective(1)));
@@ -180,12 +188,14 @@ public class SolutionSet implements Serializable {
             bwE.close();
             bwS.close();
             bwP.close();
-            Configuration.logger_.info("cantidad de registros insertados: "+solutionsList_.size());
+            Configuration.logger_.info("cantidad de registros insertados: " + solutionsList_.size());
         } catch (IOException e) {
             Configuration.logger_.severe("Error acceding to the file");
             e.printStackTrace();
         } catch (SQLException ex) {
-            Logger.getLogger(SolutionSet.class.getName()).log(Level.SEVERE, null, ex);
+            Configuration.logger_.severe("Error de insertTableSQL");
+            ex.printStackTrace();
+
         }
     }
 
@@ -342,7 +352,7 @@ public class SolutionSet implements Serializable {
 
     public void printObjectives() {
         for (int i = 0; i < solutionsList_.size(); i++) {
-            System.out.println("" + solutionsList_.get(i));
+            Configuration.logger_.info("" + solutionsList_.get(i));
         }
     }
 
@@ -358,10 +368,10 @@ public class SolutionSet implements Serializable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private String getSentenciaSQL(String x, String y, String clip, double entropia, double ssim) {
+    private String getSentenciaSQL(String n, String m, String alfa, String type, String dim, double entropia, double contraste) {
         String resultado = "INSERT INTO resultados"
-                + "(x,y,clip,entropia,nombre,dominado,nrocorrida,ssim) " + "VALUES"
-                + "(" + x + "," + y + "," + clip + "," + entropia + "," + nombreImagen + ",'N',0," + ssim + ")";
+                + "(n, m , alfa, type, dim, entropia, nombre, dominado, nrocorrida) " + "VALUES"
+                + "(" + n + "," + m + "," + alfa + "," + type + "," + dim + "," + entropia + ",'" + Configuration.nombreImagen + "','N',0)";
         return resultado;
     }
 

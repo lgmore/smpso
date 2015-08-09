@@ -18,10 +18,11 @@
 // 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package jmetal.util;
 
 public interface IRandomGenerator {
-	public int nextInt(int upperLimit) ;
-	public double nextDouble() ;
+
+    public int nextInt(int upperLimit);
+
+    public double nextDouble();
 }

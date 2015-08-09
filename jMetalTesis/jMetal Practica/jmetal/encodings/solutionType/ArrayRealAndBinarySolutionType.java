@@ -18,7 +18,6 @@
 // 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package jmetal.encodings.solutionType;
 
 import jmetal.core.Problem;
@@ -27,44 +26,44 @@ import jmetal.core.Variable;
 import jmetal.encodings.variable.ArrayReal;
 import jmetal.encodings.variable.Binary;
 
- /** 
- * Class representing the solution type of solutions composed of array of reals 
- * and a binary string.
- * ASSUMPTIONs:
- * - The numberOfVariables_ field in class Problem must contain the number
- *   of real variables. This field is used to apply real operators (e.g., 
- *   mutation probability)
- * - The upperLimit_ and lowerLimit_ arrays must have the length indicated
- *   by numberOfVariables_.
+/**
+ * Class representing the solution type of solutions composed of array of reals
+ * and a binary string. ASSUMPTIONs: - The numberOfVariables_ field in class
+ * Problem must contain the number of real variables. This field is used to
+ * apply real operators (e.g., mutation probability) - The upperLimit_ and
+ * lowerLimit_ arrays must have the length indicated by numberOfVariables_.
  */
 public class ArrayRealAndBinarySolutionType extends SolutionType {
 
-	private final int binaryStringLength_ ;
-	private final int numberOfRealVariables_ ;
-	/**
-	 * Constructor
-	 * @param problem Problem being solved
-	 * @param realVariables Number of real variables
-	 * @param binaryStringLength Length of the binary string
-	 */
-	public ArrayRealAndBinarySolutionType(Problem problem, 
-			                                  int realVariables, 
-			                                  int binaryStringLength) {
-		super(problem) ;
-		binaryStringLength_    = binaryStringLength ;
-		numberOfRealVariables_ = realVariables ;
-	} // Constructor
+    private final int binaryStringLength_;
+    private final int numberOfRealVariables_;
 
-	/**
-	 * Creates the variables of the solution
-	 * @throws ClassNotFoundException
-	 */
-	public Variable[] createVariables() throws ClassNotFoundException {
-		Variable [] variables = new Variable[2];
+    /**
+     * Constructor
+     *
+     * @param problem Problem being solved
+     * @param realVariables Number of real variables
+     * @param binaryStringLength Length of the binary string
+     */
+    public ArrayRealAndBinarySolutionType(Problem problem,
+            int realVariables,
+            int binaryStringLength) {
+        super(problem);
+        binaryStringLength_ = binaryStringLength;
+        numberOfRealVariables_ = realVariables;
+    } // Constructor
 
-    variables[0] = new ArrayReal(numberOfRealVariables_, problem_);
-    variables[1] = new Binary(binaryStringLength_); 
-    return variables ;
-	} // createVariables
+    /**
+     * Creates the variables of the solution
+     *
+     * @throws ClassNotFoundException
+     */
+    public Variable[] createVariables() throws ClassNotFoundException {
+        Variable[] variables = new Variable[2];
+
+        variables[0] = new ArrayReal(numberOfRealVariables_, problem_);
+        variables[1] = new Binary(binaryStringLength_);
+        return variables;
+    } // createVariables
 } // ArrayRealAndBinarySolutionType
 

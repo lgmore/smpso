@@ -18,7 +18,6 @@
 // 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package jmetal.encodings.variable;
 
 import jmetal.core.Variable;
@@ -28,122 +27,127 @@ import jmetal.core.Variable;
  */
 public class Permutation extends Variable {
 
-  /**
-   * Stores a permutation of <code>int</code> values
-   */
-  public int [] vector_;
+    /**
+     * Stores a permutation of <code>int</code> values
+     */
+    public int[] vector_;
 
-  /**
-   * Stores the length of the permutation
-   */
-  public int size_;
+    /**
+     * Stores the length of the permutation
+     */
+    public int size_;
 
-  /**
-   * Constructor
-   */
-  public Permutation() {
-    size_   = 0;
-    vector_ = null;
+    /**
+     * Constructor
+     */
+    public Permutation() {
+        size_ = 0;
+        vector_ = null;
 
-  } //Permutation
+    } //Permutation
 
-  /**
-   * Constructor
-   * @param size Length of the permutation
-   */
-  /*
-  public Permutation(int size) {
-	  setVariableType(VariableType_.Permutation) ;
+    /**
+     * Constructor
+     *
+     * @param size Length of the permutation
+     */
+    /*
+     public Permutation(int size) {
+     setVariableType(VariableType_.Permutation) ;
 
-	  size_   = size;
-    vector_ = new int[size_];
+     size_   = size;
+     vector_ = new int[size_];
     
-    int [] randomSequence = new int[size_];
+     int [] randomSequence = new int[size_];
     
-    for(int k = 0; k < size_; k++){
-      int num           = PseudoRandom.randInt();
-      randomSequence[k] = num;
-      vector_[k]        = k;
-    } 
+     for(int k = 0; k < size_; k++){
+     int num           = PseudoRandom.randInt();
+     randomSequence[k] = num;
+     vector_[k]        = k;
+     } 
 
-    // sort value and store index as fragment order
-    for(int i = 0; i < size_-1; i++){
-      for(int j = i+1; j < size_; j++) {
-        if(randomSequence[i] > randomSequence[j]){
-          int temp          = randomSequence[i];
-          randomSequence[i] = randomSequence[j];
-          randomSequence[j] = temp;
+     // sort value and store index as fragment order
+     for(int i = 0; i < size_-1; i++){
+     for(int j = i+1; j < size_; j++) {
+     if(randomSequence[i] > randomSequence[j]){
+     int temp          = randomSequence[i];
+     randomSequence[i] = randomSequence[j];
+     randomSequence[j] = temp;
 
-          temp       = vector_[i];
-          vector_[i] = vector_[j];
-          vector_[j] = temp;
+     temp       = vector_[i];
+     vector_[i] = vector_[j];
+     vector_[j] = temp;
+     }
+     }
+     }
+     } //Permutation
+     * */
+    /**
+     * Constructor
+     *
+     * @param size Length of the permutation This constructor has been
+     * contributed by Madan Sathe
+     */
+    public Permutation(int size) {
+        size_ = size;
+        vector_ = new int[size_];
+
+        java.util.ArrayList<Integer> randomSequence = new java.util.ArrayList<Integer>(size_);
+
+        for (int i = 0; i < size_; i++) {
+            randomSequence.add(i);
         }
-      }
-    }
-  } //Permutation
-   * */
 
-  /**
-   * Constructor
-   * @param size Length of the permutation
-   * This constructor has been contributed by Madan Sathe
-   */
-  public Permutation(int size) {
-    size_   = size;
-    vector_ = new int[size_];
+        java.util.Collections.shuffle(randomSequence);
 
-    java.util.ArrayList<Integer> randomSequence = new
-            java.util.ArrayList<Integer>(size_);
+        for (int j = 0; j < randomSequence.size(); j++) {
+            vector_[j] = randomSequence.get(j);
+        }
+    } // Constructor
 
-    for(int i = 0; i < size_; i++)
-      randomSequence.add(i);
+    /**
+     * Copy Constructor
+     *
+     * @param permutation The permutation to copy
+     */
+    public Permutation(Permutation permutation) {
+        size_ = permutation.size_;
+        vector_ = new int[size_];
 
-    java.util.Collections.shuffle(randomSequence);
+        System.arraycopy(permutation.vector_, 0, vector_, 0, size_);
+    } //Permutation
 
-    for(int j = 0; j < randomSequence.size(); j++)
-      vector_[j] = randomSequence.get(j);
-  } // Constructor
+    /**
+     * Create an exact copy of the <code>Permutation</code> object.
+     *
+     * @return An exact copy of the object.
+     */
+    public Variable deepCopy() {
+        return new Permutation(this);
+    } //deepCopy
 
+    /**
+     * Returns the length of the permutation.
+     *
+     * @return The length
+     */
+    public int getLength() {
+        return size_;
+    } //getNumberOfBits
 
-  /**
-   * Copy Constructor
-   * @param permutation The permutation to copy
-   */
-  public Permutation(Permutation permutation) {
-    size_   = permutation.size_;
-    vector_ = new int[size_];
+    /**
+     * Returns a string representing the object
+     *
+     * @return The string
+     */
+    public String toString() {
+        String string;
 
-    System.arraycopy(permutation.vector_, 0, vector_, 0, size_);
-  } //Permutation
+        string = "";
+        for (int i = 0; i < size_; i++) {
+            string += vector_[i] + " ";
+        }
 
-
-  /**
-   * Create an exact copy of the <code>Permutation</code> object.
-   * @return An exact copy of the object.
-   */
-  public Variable deepCopy() {
-    return new Permutation(this);
-  } //deepCopy
-
-  /**
-   * Returns the length of the permutation.
-   * @return The length
-   */
-  public int getLength(){
-    return size_;
-  } //getNumberOfBits
-
-  /**
-   * Returns a string representing the object
-   * @return The string
-   */
-  public String toString(){
-    String string ;
-
-    string = "" ;
-    for (int i = 0; i < size_ ; i ++)
-      string += vector_[i] + " " ;
-
-    return string ;
-  } // toString
+        return string;
+    } // toString
 } // Permutation

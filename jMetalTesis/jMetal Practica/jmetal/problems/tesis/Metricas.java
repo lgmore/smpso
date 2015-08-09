@@ -10,6 +10,7 @@ package jmetal.problems.tesis;
  * @author Estefanis
  */
 public class Metricas {
+
     private double entropia;
     private double contraste;
 
@@ -50,7 +51,5 @@ public class Metricas {
     public void setContraste(double contraste) {
         this.contraste = contraste;
     }
-    
-    
-    
+
 }

@@ -3,12 +3,12 @@ package jmetal.core;
 import jmetal.encodings.variable.Binary;
 import java.io.Serializable;
 
-public class Solution implements Serializable {  
-    
+public class Solution implements Serializable {
+
     private Problem problem_;
     private SolutionType type_;
     private Variable[] variable_;
-    private final double [] objective_;
+    private final double[] objective_;
     private int numberOfObjectives_;
     private double crowdingDistance_;
     private String nombreImagenResultado;
@@ -16,7 +16,7 @@ public class Solution implements Serializable {
     private double overallConstraintViolation_;//Stores the overall constraint violation of the solution.
     private int numberOfViolatedConstraints_;//Stores the number of constraints violated by the solution.
 
-    public Solution() {        
+    public Solution() {
         problem_ = null;
         overallConstraintViolation_ = 0.0;
         numberOfViolatedConstraints_ = 0;
@@ -31,7 +31,7 @@ public class Solution implements Serializable {
         objective_ = new double[numberOfObjectives];
     }
 
-    public Solution(Problem problem) throws ClassNotFoundException{
+    public Solution(Problem problem) throws ClassNotFoundException {
         problem_ = problem;
         type_ = problem.getSolutionType();
         numberOfObjectives_ = problem.getNumberOfObjectives();
@@ -39,12 +39,12 @@ public class Solution implements Serializable {
         fitness_ = 0.0;
         variable_ = type_.createVariables();
     }
-  
+
     static public Solution getNewSolution(Problem problem) throws ClassNotFoundException {
         return new Solution(problem);
     }
-  
-    public Solution(Problem problem, Variable [] variables){
+
+    public Solution(Problem problem, Variable[] variables) {
         problem_ = problem;
         type_ = problem.getSolutionType();
         numberOfObjectives_ = problem.getNumberOfObjectives();
@@ -53,12 +53,12 @@ public class Solution implements Serializable {
         variable_ = variables;
     }
 
-    public Solution(Solution solution) {            
-        problem_ = solution.problem_ ;
+    public Solution(Solution solution) {
+        problem_ = solution.problem_;
         type_ = solution.type_;
         numberOfObjectives_ = solution.getNumberOfObjectives();
         objective_ = new double[numberOfObjectives_];
-        for (int i = 0; i < objective_.length;i++) {
+        for (int i = 0; i < objective_.length; i++) {
             objective_[i] = solution.getObjective(i);
         }
         variable_ = type_.copyVariables(solution.variable_);
@@ -68,14 +68,14 @@ public class Solution implements Serializable {
         nombreImagenResultado = solution.nombreImagenResultado;
     }
 
-    public void setCrowdingDistance(double distance){
+    public void setCrowdingDistance(double distance) {
         crowdingDistance_ = distance;
     }
 
-    public double getCrowdingDistance(){
+    public double getCrowdingDistance() {
         return crowdingDistance_;
     }
-    
+
     public void setFitness(double fitness) {
         fitness_ = fitness;
     }
@@ -93,8 +93,11 @@ public class Solution implements Serializable {
     }
 
     public int getNumberOfObjectives() {
-        if (objective_ == null) return 0;
-        else return numberOfObjectives_;
+        if (objective_ == null) {
+            return 0;
+        } else {
+            return numberOfObjectives_;
+        }
     }
 
     public int numberOfVariables() {
@@ -103,9 +106,10 @@ public class Solution implements Serializable {
 
     @Override
     public String toString() {
-        String aux="";
-        for (int i = 0; i < this.numberOfObjectives_; i++)
+        String aux = "";
+        for (int i = 0; i < this.numberOfObjectives_; i++) {
             aux = aux + this.getObjective(i) + "    ----    ";
+        }
         return aux;
     }
 
@@ -113,7 +117,7 @@ public class Solution implements Serializable {
         return variable_;
     }
 
-    public void setDecisionVariables(Variable [] variables) {
+    public void setDecisionVariables(Variable[] variables) {
         variable_ = variables;
     }
 
@@ -146,26 +150,28 @@ public class Solution implements Serializable {
     }
 
     public double getAggregativeValue() {
-        double value = 0.0;                
-        for (int i = 0; i < getNumberOfObjectives(); i++){
+        double value = 0.0;
+        for (int i = 0; i < getNumberOfObjectives(); i++) {
             value += getObjective(i);
-        }                
+        }
         return value;
     }
 
     public int getNumberOfBits() {
         int bits = 0;
-        for (int i = 0;  i < variable_.length  ; i++)
-            if ((variable_[i].getVariableType() == jmetal.encodings.variable.Binary.class) || (variable_[i].getVariableType() == jmetal.encodings.variable.BinaryReal.class))
-                bits += ((Binary)(variable_[i])).getNumberOfBits();
+        for (int i = 0; i < variable_.length; i++) {
+            if ((variable_[i].getVariableType() == jmetal.encodings.variable.Binary.class) || (variable_[i].getVariableType() == jmetal.encodings.variable.BinaryReal.class)) {
+                bits += ((Binary) (variable_[i])).getNumberOfBits();
+            }
+        }
         return bits;
     }
-    
-    public void setNombreImagenResultado(String nombreImagenResultado){
+
+    public void setNombreImagenResultado(String nombreImagenResultado) {
         this.nombreImagenResultado = nombreImagenResultado;
     }
-    
-    public String getNombreImagenResultado(){
+
+    public String getNombreImagenResultado() {
         return nombreImagenResultado;
     }
 }

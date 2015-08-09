@@ -18,7 +18,6 @@
 // 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package jmetal.encodings.solutionType;
 
 import jmetal.core.Problem;
@@ -26,29 +25,31 @@ import jmetal.core.SolutionType;
 import jmetal.core.Variable;
 import jmetal.encodings.variable.Permutation;
 
-/** 
+/**
  * Class representing the solution type of solutions composed of Permutation
- * variables 
+ * variables
  */
 public class PermutationSolutionType extends SolutionType {
 
-	/**
-	 * Constructor
-	 * @param problem  Problem to solve
-	 */
-	public PermutationSolutionType(Problem problem) {
-		super(problem) ;
-  } // PermutationSolution
-	
-	/**
-	 * Creates the variables of the solution
-	 */
-	public Variable[]  createVariables() {
-		Variable [] variables = new Variable[problem_.getNumberOfVariables()];
-		    
-    for (int var = 0; var < problem_.getNumberOfVariables(); var++)
-    	variables[var] = new Permutation(problem_.getLength(var)) ;   
-    
-    return variables ;
-	} // createVariables
+    /**
+     * Constructor
+     *
+     * @param problem Problem to solve
+     */
+    public PermutationSolutionType(Problem problem) {
+        super(problem);
+    } // PermutationSolution
+
+    /**
+     * Creates the variables of the solution
+     */
+    public Variable[] createVariables() {
+        Variable[] variables = new Variable[problem_.getNumberOfVariables()];
+
+        for (int var = 0; var < problem_.getNumberOfVariables(); var++) {
+            variables[var] = new Permutation(problem_.getLength(var));
+        }
+
+        return variables;
+    } // createVariables
 } // PermutationSolutionType

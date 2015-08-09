@@ -22,13 +22,13 @@ public abstract class Variable implements Serializable {
         throw new JMException("Exception in " + name + ".setValue()");
     }
 
-    public double getLowerBound() throws JMException { 
+    public double getLowerBound() throws JMException {
         Class cls = java.lang.String.class;
-        String name = cls.getName(); 
+        String name = cls.getName();
         Configuration.logger_.severe("Class " + name + " does not implement method getLowerBound()");
         throw new JMException("Exception in " + name + ".getLowerBound()");
     }
-  
+
     public double getUpperBound() throws JMException {
         Class cls = java.lang.String.class;
         String name = cls.getName();
@@ -42,7 +42,7 @@ public abstract class Variable implements Serializable {
         Configuration.logger_.severe("Class " + name + " does not implement method setLowerBound()");
         throw new JMException("Exception in " + name + ".setLowerBound()");
     }
-  
+
     public void setUpperBound(double upperBound) throws JMException {
         Class cls = java.lang.String.class;
         String name = cls.getName();
@@ -53,4 +53,5 @@ public abstract class Variable implements Serializable {
     public Class getVariableType() {
         return this.getClass();
     }
+
 }

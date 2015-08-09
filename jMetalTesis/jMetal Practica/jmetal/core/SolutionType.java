@@ -1,7 +1,7 @@
 package jmetal.core;
 
 public abstract class SolutionType {
-    
+
     public final Problem problem_;
 
     public SolutionType(Problem problem) {

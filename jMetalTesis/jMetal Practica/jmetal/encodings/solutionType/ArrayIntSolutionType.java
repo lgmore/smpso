@@ -18,7 +18,6 @@
 // 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package jmetal.encodings.solutionType;
 
 import jmetal.core.Problem;
@@ -27,40 +26,42 @@ import jmetal.core.Variable;
 import jmetal.encodings.variable.ArrayInt;
 
 /**
-* Class representing the solution type of solutions composed of an ArrayInt 
-* encodings.variable
-*/
+ * Class representing the solution type of solutions composed of an ArrayInt
+ * encodings.variable
+ */
 public class ArrayIntSolutionType extends SolutionType {
 
-	/**
-	 * Constructor
-	 * @param problem Problem being solved
-	 */
-	public ArrayIntSolutionType(Problem problem) {
-		super(problem) ;
-	}
-	
-	/**
-	 * Creates the variables of the solution
-	 */
-	public Variable[] createVariables() {
-		Variable [] variables = new Variable[1];
-		
-    variables[0] = new ArrayInt(problem_.getNumberOfVariables(), problem_);
-    return variables ;
-	} // createVariables
-	
-	/**
-	 * Copy the variables
-	 * @param vars Variables to copy
-	 * @return An array of variables
-	 */
-	public Variable[] copyVariables(Variable[] vars) {
-		Variable[] variables ;
-		
-		variables = new Variable[1];
-	  variables[0] = vars[0].deepCopy();
-		
-		return variables ;
-	} // copyVariables
+    /**
+     * Constructor
+     *
+     * @param problem Problem being solved
+     */
+    public ArrayIntSolutionType(Problem problem) {
+        super(problem);
+    }
+
+    /**
+     * Creates the variables of the solution
+     */
+    public Variable[] createVariables() {
+        Variable[] variables = new Variable[1];
+
+        variables[0] = new ArrayInt(problem_.getNumberOfVariables(), problem_);
+        return variables;
+    } // createVariables
+
+    /**
+     * Copy the variables
+     *
+     * @param vars Variables to copy
+     * @return An array of variables
+     */
+    public Variable[] copyVariables(Variable[] vars) {
+        Variable[] variables;
+
+        variables = new Variable[1];
+        variables[0] = vars[0].deepCopy();
+
+        return variables;
+    } // copyVariables
 } // ArrayIntSolutionType

@@ -1,23 +1,13 @@
 package jmetal.problems.tesis;
 
-import com.google.gson.Gson;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import jmetal.core.Problem;
 import jmetal.core.Solution;
 import jmetal.core.Variable;
 import jmetal.encodings.solutionType.IntRealSolutionType;
 import jmetal.metaheuristics.smpso.SMPSOTesis;
-import jmetal.metaheuristics.smpso.SMPSOTesis_main;
+import jmetal.util.Configuration;
 import jmetal.util.JMException;
 import matlabcontrol.MatlabInvocationException;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 /**
@@ -25,51 +15,32 @@ import org.apache.log4j.Logger;
  */
 public class Tesis extends Problem {
 
-    int cantidadVarInt;
-    int cantidadVarReal;
+    private static final Logger log = Logger.getLogger(Tesis.class.getName());
+
     int filas;
     int columnas;
-    int[][] imagen;
     String nombreImagen;
-    double ssim;
-    public static final Logger log = Logger.getLogger(Tesis.class.getName());
 
     public Tesis() {
 
-        /**
-         * variables de desicion
-         *
-         * alfa [ 0 - 0.5] double n [0,4] int type [0,4] int dim [1,10] int
-         *
-         * objetivos ??????
-         *
-         */
-        
-        cantidadVarInt = 3;
-        cantidadVarReal = 1;
-        numeroDeVariables = 4;
-        numeroDeObjetivos = 2;
-        nombreProblema = "Tesis";
         upperLimit_ = new double[numeroDeVariables];
         lowerLimit_ = new double[numeroDeVariables];
-        //alfa
-        lowerLimit_[0] = 0;
-        upperLimit_[0] = 0.5;
-        //n
-        lowerLimit_[1] = 0;
-        upperLimit_[1] = 4;
-        
-        //type
-        lowerLimit_[2] = 0;
-        upperLimit_[2] = 4;
-
         //dim
-        lowerLimit_[3] = 1;
-        upperLimit_[3] = 10;
+        lowerLimit_[0] = Configuration.dimMin;
+        upperLimit_[0] = Configuration.dimMax;
+        //n
+        lowerLimit_[1] = Configuration.nMin;
+        upperLimit_[1] = Configuration.mMax -1;
 
+        //type
+        lowerLimit_[2] = Configuration.typeMin;
+        upperLimit_[2] = Configuration.typeMax;
 
-        
-        tipoSolucion = new IntRealSolutionType(this, 2, 1);
+        //alfa
+        lowerLimit_[3] = Configuration.alfaMin;
+        upperLimit_[3] = Configuration.alfaMax;
+
+        tipoSolucion = new IntRealSolutionType(this, cantidadVarInt, cantidadVarReal);
     }
 
     @Override
@@ -80,15 +51,14 @@ public class Tesis extends Problem {
         fx[1] = variables[1].getValue();
         fx[2] = variables[2].getValue();
         fx[3] = variables[3].getValue();
-        
-        Metricas resultado=null;
+
+        Metricas resultado = null;
         try {
             resultado = getMCL(fx);
         } catch (MatlabInvocationException ex) {
             log.error("error: " + ex.getMessage());
         }
-        
-        //double entropia = getEntropia(getHistograma(imagenClahe,filas,columnas),filas*columnas);
+
         solution.setNombreImagenResultado(nombreImagen);
         solution.setObjective(0, resultado.getContraste());
         solution.setObjective(1, resultado.getEntropia());
@@ -129,8 +99,6 @@ public class Tesis extends Problem {
 //        }
 //        return entropia;
 //    }
-
-
 //    private int[][] getCLAHE(int ventanaX, int ventanaY, double clipLimit){
 //        try{
 //            HttpClient client = new DefaultHttpClient();
@@ -161,18 +129,20 @@ public class Tesis extends Problem {
 //        return null;
 //    }
     private Metricas getMCL(double[] fx) throws MatlabInvocationException {
-        String strInvocacion = "[e , c] = testMCLV2('mdb001.pgm',1,2,0.5,1,10)";
+        //String strInvocacion = "[e , c] = testMCLV2('mdb001.pgm',1,2,0.5,1,10)";
         StringBuilder builder = new StringBuilder();
 
-        builder.append("[e , c] = testMCLV2('").append(SMPSOTesis.getNombreImagen())
+        builder.append("[e , c] = testMCLV2('").append(Configuration.nombreImagen)
                 .append("',")
-                .append(fx[0]).append(",")
-                .append("5").append(",")
-                .append(fx[1]).append(",")
-                .append(fx[2]).append(",")
-                .append(fx[3]).append(")");
+                .append((int) fx[1]).append(",")
+                .append(Configuration.mMax).append(",")
+                .append(fx[3]).append(",")
+                .append((int) fx[2]).append(",")
+                .append((int) fx[0]).append(")");
 
+        log.info("COMANDO MATLAB: " + builder);
         Metricas resultados = run(builder.toString());
+
         return resultados;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -185,7 +155,6 @@ public class Tesis extends Problem {
         double entropia = ((double[]) SMPSOTesis.proxy.getVariable("e"))[0];
         double contraste = ((double[]) SMPSOTesis.proxy.getVariable("c"))[0];
         metricas = new Metricas(entropia, contraste);
-        System.out.println(metricas.toString());
         return metricas;
     }
 

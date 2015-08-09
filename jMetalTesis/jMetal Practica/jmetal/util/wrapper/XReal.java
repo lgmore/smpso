@@ -5,11 +5,12 @@ import jmetal.core.SolutionType;
 import jmetal.util.JMException;
 
 public class XReal {
-    
+
     private Solution solution_;
     private SolutionType type_;
 
-    public XReal() {}
+    public XReal() {
+    }
 
     public XReal(Solution solution) {
         this();
@@ -20,7 +21,7 @@ public class XReal {
     public double getValue(int index) throws JMException {
         return solution_.getDecisionVariables()[index].getValue();
     }
-    
+
     public void setValue(int index, double value) throws JMException {
         solution_.getDecisionVariables()[index].setValue(value);
     }

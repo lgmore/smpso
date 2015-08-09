@@ -2,21 +2,25 @@ package jmetal.core;
 
 import jmetal.util.JMException;
 import java.io.Serializable;
+import jmetal.util.Configuration;
 
 public abstract class Problem implements Serializable {
 
     private final static int DEFAULT_PRECISSION = 16;//Defines the default precision of binary-coded variables
-    protected int numeroDeVariables;//numero de variables del problema
-    protected int numeroDeObjetivos;//numero de objetivos del problema
-    protected String nombreProblema;//nombre del problema
+    public final int cantidadVarInt = Configuration.cantidadVarInt;
+    public final int cantidadVarReal = Configuration.cantidadVarReal;
+    public final int numeroDeVariables = Configuration.numeroVariables;//numero de variables del problema
+    public final int numeroDeObjetivos = Configuration.numeroObjetivos;//numero de objetivos del problema
+    public final String nombreProblema = Configuration.nombreProblema;//nombre del problema
+
     protected SolutionType tipoSolucion;//tipo de dato de la solucion
-    protected double [] lowerLimit_;//Stores the lower bound values for each encodings.variable (only if needed)
-    protected double [] upperLimit_;//Stores the upper bound values for each encodings.variable (only if needed)
-    private int [] precision_;//Stores the number of bits used by binary-coded variables (e.g., BinaryReal variables). By default, they are initialized to DEFAULT_PRECISION)
-    protected int [] length_;//Stores the length of each encodings.variable when applicable (e.g., Binary and Permutation variables)
-    
+    protected double[] lowerLimit_;//Stores the lower bound values for each encodings.variable (only if needed)
+    protected double[] upperLimit_;//Stores the upper bound values for each encodings.variable (only if needed)
+    private int[] precision_;//Stores the number of bits used by binary-coded variables (e.g., BinaryReal variables). By default, they are initialized to DEFAULT_PRECISION)
+    protected int[] length_;//Stores the length of each encodings.variable when applicable (e.g., Binary and Permutation variables)
+
     public abstract void evaluate(Solution solution) throws JMException;
-    
+
     public Problem() {
         tipoSolucion = null;
     }
@@ -24,13 +28,9 @@ public abstract class Problem implements Serializable {
     public Problem(SolutionType solutionType) {
         tipoSolucion = solutionType;
     }
-    
+
     public int getNumberOfVariables() {
         return numeroDeVariables;
-    }
-
-    public void setNumberOfVariables(int numberOfVariables) {
-        numeroDeVariables = numberOfVariables;   
     }
 
     public int getNumberOfObjectives() {
@@ -49,16 +49,18 @@ public abstract class Problem implements Serializable {
         return precision_[var];
     }
 
-    public int [] getPrecision() {
+    public int[] getPrecision() {
         return precision_;
     }
 
-    public void setPrecision(int [] precision) {
+    public void setPrecision(int[] precision) {
         precision_ = precision;
     }
 
     public int getLength(int var) {
-        if (length_ == null) return DEFAULT_PRECISSION;
+        if (length_ == null) {
+            return DEFAULT_PRECISSION;
+        }
         return length_[var];
     }
 

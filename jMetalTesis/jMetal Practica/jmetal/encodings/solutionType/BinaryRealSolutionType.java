@@ -18,7 +18,6 @@
 // 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 package jmetal.encodings.solutionType;
 
 import jmetal.core.Problem;
@@ -27,36 +26,38 @@ import jmetal.core.Variable;
 import jmetal.encodings.variable.BinaryReal;
 
 /**
- *  Class representing the solution type of solutions composed of BinaryReal 
- *  variables
+ * Class representing the solution type of solutions composed of BinaryReal
+ * variables
  */
 public class BinaryRealSolutionType extends SolutionType {
 
-	/**
-	 * Constructor
-	 * @param problem Problem to solve
-	 */
-	public BinaryRealSolutionType(Problem problem) {
-		super(problem) ;
-	} // Constructor
-	
-	/**
-	 * Creates the variables of the solution
-	 */
-	public Variable[] createVariables() {
-		Variable [] variables = new Variable[problem_.getNumberOfVariables()];
-	  
-    for (int var = 0; var < problem_.getNumberOfVariables(); var++) {
-      if (problem_.getPrecision() == null) {
-        int [] precision = new int[problem_.getNumberOfVariables()] ;
-        for (int i = 0; i < problem_.getNumberOfVariables(); i++)
-          precision[i] = jmetal.encodings.variable.BinaryReal.DEFAULT_PRECISION ;
-        problem_.setPrecision(precision) ;
-      } // if
-      variables[var] = new BinaryReal(problem_.getPrecision(var),
-                                      problem_.getLowerLimit(var),
-                                      problem_.getUpperLimit(var));   
-    } // for 
-    return variables ;    
-	} // createVariables
+    /**
+     * Constructor
+     *
+     * @param problem Problem to solve
+     */
+    public BinaryRealSolutionType(Problem problem) {
+        super(problem);
+    } // Constructor
+
+    /**
+     * Creates the variables of the solution
+     */
+    public Variable[] createVariables() {
+        Variable[] variables = new Variable[problem_.getNumberOfVariables()];
+
+        for (int var = 0; var < problem_.getNumberOfVariables(); var++) {
+            if (problem_.getPrecision() == null) {
+                int[] precision = new int[problem_.getNumberOfVariables()];
+                for (int i = 0; i < problem_.getNumberOfVariables(); i++) {
+                    precision[i] = jmetal.encodings.variable.BinaryReal.DEFAULT_PRECISION;
+                }
+                problem_.setPrecision(precision);
+            } // if
+            variables[var] = new BinaryReal(problem_.getPrecision(var),
+                    problem_.getLowerLimit(var),
+                    problem_.getUpperLimit(var));
+        } // for 
+        return variables;
+    } // createVariables
 } // BinaryRealSolutionType
