@@ -11,6 +11,7 @@ import jmetal.util.wrapper.XReal;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Comparator;
+import jmetal.util.Configuration;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabProxy;
 import matlabcontrol.MatlabProxyFactory;
@@ -50,7 +51,6 @@ public class SMPSOTesis extends Algorithm {
     public static MatlabProxyFactory factory;
     public static MatlabProxy proxy;
 
-    
     public SMPSOTesis(Problem problema) {
         super(problema);
         r1Max_ = 1.0;//numero aleatorio 1 maximo 1
@@ -191,42 +191,44 @@ public class SMPSOTesis extends Algorithm {
     @Override
     public SolutionSet execute() throws JMException, ClassNotFoundException {
 
+        log.info("-------------------------------------------------------");
+        log.info("Empieza: " + Calendar.getInstance().getTime().toString());
+        log.info("STEP 0, iniciar Parametros");
         try {
             iniciarParametros();
         } catch (MatlabConnectionException mce) {
             log.error("Error en la conexion con el MATLAB " + mce.getMessage());
             System.exit(-1);
         }
-        log.info("Empieza: " + Calendar.getInstance().getTime().toString());
-        //->Step 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+
+        log.info("STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una");
         for (int i = 0; i < tamanhoEnjambre; i++) {
             Solution particula = new Solution(problem_);//crea la particula con valores random en sus variables, del tipo de solucion de la particula, para este caso es "Real"
             problem_.evaluate(particula);//evaluacion de la particula, pondra valores en sus objetivos
             particulas.add(particula);//se añade al enjambre
-            log.info("Particula [" + i + "] OBJ. Contraste: " + particula.getObjective(0) + ". Entropia: " + particula.getObjective(1));
-            log.info("Particula [" + i + "] VARDESC. n:" + particula.getDecisionVariables()[1].toString() + ", m:5, alfa:" + particula.getDecisionVariables()[3].toString() + ", type:" + particula.getDecisionVariables()[2].toString() + ", dim:" + particula.getDecisionVariables()[0].toString());
+            log.info("Particula [" + i + " de " + tamanhoEnjambre + "] OBJ. contraste:" + particula.getObjective(0) + ", entropia:" + particula.getObjective(1) + " VARDESC. n:" + particula.getDecisionVariables()[1].toString() + ", m:" + Configuration.mMax + ", alfa:" + particula.getDecisionVariables()[3].toString() + ", type:" + particula.getDecisionVariables()[2].toString() + ", dim:" + particula.getDecisionVariables()[0].toString());
         }
-        //-> Step2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
+        log.info("STEP 2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables");
         for (int i = 0; i < tamanhoEnjambre; i++) {//por cada particula
             for (int j = 0; j < problem_.getNumberOfVariables(); j++) {//por cada variable
                 matrizVelocidad[i][j] = 0.0;
             }
         }
-        // Step4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)
+        log.info("STEP 4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)");
         for (int i = 0; i < particulas.size(); i++) {//por cada particula del swarm iniciamos a los que seran lideres desde el inicio
             Solution particula = new Solution(particulas.get(i));//creamos un posible lider con la particula
             mejoresGlobales.add(particula);//solo se añade al archivo si la particula es dominante respecto a las que ya estan en el archivo de lideres
         }
-        //-> Step 6. Initialize the memory of each particle, al principio todos son mejores locales
+        log.info("STEP 6. Initialize the memory of each particle, al principio todos son mejores locales");
         for (int i = 0; i < particulas.size(); i++) {
             Solution particula = new Solution(particulas.get(i));
             mejoresLocales[i] = particula;
         }
         //Crowding the mejoresGlobales, distancia entre los lideres, se calcula en base a los valores de sus objetivos y los de sus vecinos, ordenados de forma ascendente
         distance_.crowdingDistanceAssignment(mejoresGlobales, problem_.getNumberOfObjectives());
-        //-> Step 7. Iteraciones
+        log.info("STEP 7. Iteraciones");
         while (iteracion < maximoIteraciones) {
-            log.info("Particula [" + iteracion + "] " + Calendar.getInstance().getTime().toString());
+            log.info("Iteracion [" + iteracion + " de " + maximoIteraciones + "] " + Calendar.getInstance().getTime().toString());
             try {
                 calcularVelocidad(iteracion, maximoIteraciones);
             } catch (IOException ex) {
@@ -238,8 +240,7 @@ public class SMPSOTesis extends Algorithm {
             for (int i = 0; i < particulas.size(); i++) {//por cada particula
                 Solution particula = particulas.get(i);
                 problem_.evaluate(particula);//evaluar funciones del problema
-                log.info("Particula [" + i + "] OBJ. Contraste: " + particula.getObjective(0) + ". Entropia: " + particula.getObjective(1));
-                log.info("Particula [" + i + "] VARDESC. n:" + particula.getDecisionVariables()[1].toString() + ", m:5, alfa:" + particula.getDecisionVariables()[3].toString() + ", type:" + particula.getDecisionVariables()[2].toString() + ", dim:" + particula.getDecisionVariables()[0].toString());
+                log.info("Particula [" + i + " de " + particulas.size() + "] OBJ. contraste:" + particula.getObjective(0) + ", entropia:" + particula.getObjective(1) + " VARDESC. n:" + particula.getDecisionVariables()[1].toString() + ", m:" + Configuration.mMax + ", alfa:" + particula.getDecisionVariables()[3].toString() + ", type:" + particula.getDecisionVariables()[2].toString() + ", dim:" + particula.getDecisionVariables()[0].toString());
             }
             //Actualizar el archivo de lideres no dominados, solo entran los q no son dominados, los dominados se van quitando de la lista
             for (int i = 0; i < particulas.size(); i++) {
@@ -258,10 +259,8 @@ public class SMPSOTesis extends Algorithm {
             distance_.crowdingDistanceAssignment(mejoresGlobales, problem_.getNumberOfObjectives());
             iteracion++;//aumentamos la iteracion
         }
+        log.info("-------------------------------------------------------");
         return mejoresGlobales;
     }
 
-    
-
-    
 }

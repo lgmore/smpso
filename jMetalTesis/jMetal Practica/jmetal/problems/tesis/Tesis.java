@@ -140,7 +140,6 @@ public class Tesis extends Problem {
                 .append((int) fx[2]).append(",")
                 .append((int) fx[0]).append(")");
 
-        log.info("COMANDO MATLAB: " + builder);
         Metricas resultados = run(builder.toString());
 
         return resultados;

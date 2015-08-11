@@ -29,6 +29,6 @@ disp(strcat('con mejora local. entropia= ',num2str(e), ', contraste= ' , num2str
 imshow(uint8(f)); title(strcat('con mejora local. entropia=',num2str(e), ', contraste= ' , num2str(c)));
 % guarda el resultado
 figuresdir = pwd; 
-saveas(figure(2), strcat(figuresdir,'/Resultados/','resultado',datestr(now,'mm-dd-yyyy-HHMMSS'),'.png'));
+saveas(figure(2), strcat(figuresdir,'/Resultados/','IMG',datestr(now,'mm-dd-yyyy-HHMMSS'),'.png'));
 disp(strcat('Fin de la ejecucion de MCL'));
 end

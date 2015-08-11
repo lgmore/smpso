@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jmetal.util.Configuration;
 
 public class SolutionSet implements Serializable {
@@ -122,135 +125,78 @@ public class SolutionSet implements Serializable {
         return solutionsList_.size();
     }
 
-    /*public void printObjectivesToFile(String path){
-     try {
-     FileOutputStream fos = new FileOutputStream(path);
-     OutputStreamWriter osw = new OutputStreamWriter(fos);
-     BufferedWriter bw = new BufferedWriter(osw);
-     //bw.write("Entropía        ----        SSIM");
-     bw.write("Entropía*SSIM");
-     bw.newLine();
-     for (Solution aSolutionsList_ : solutionsList_) {
-     bw.write(aSolutionsList_.toString());
-     //bw.write(String.valueOf(aSolutionsList_.getIntensidadMedia()));
-     bw.newLine();
-     }
-     bw.close();
-     }catch (IOException e) {
-     Configuration.logger_.severe("Error acceding to the file");
-     e.printStackTrace();
-     }
-     }*/
-    public void printObjectivesToFile(String path) {
-
-        Connection dbConnection = null;
-        Statement statement = null;
-
-        String insertTableSQL;
-
+    public void printObjectivesToFile() {
         try {
-
-            FileOutputStream fosE = new FileOutputStream("ENTROPIA");
-            FileOutputStream fosS = new FileOutputStream("SSIM");
-            FileOutputStream fosP = new FileOutputStream("POND");
+            Configuration.logger_.info("Cargando el archivo OBJETIVO...");
+            FileOutputStream fosE = new FileOutputStream("OBJETIVOS");
             OutputStreamWriter oswE = new OutputStreamWriter(fosE);
-            OutputStreamWriter oswS = new OutputStreamWriter(fosS);
-            OutputStreamWriter oswP = new OutputStreamWriter(fosP);
             BufferedWriter bwE = new BufferedWriter(oswE);
-            BufferedWriter bwS = new BufferedWriter(oswS);
-            BufferedWriter bwP = new BufferedWriter(oswP);
             for (Solution aSolutionsList_ : solutionsList_) {
-
-                // int n, int m, double alfa, int type, int dim, double entropia, double contraste
-                insertTableSQL = getSentenciaSQL(
-                        aSolutionsList_.getDecisionVariables()[1].toString(), //n
-                        "5", // m
-                        aSolutionsList_.getDecisionVariables()[0].toString(), //alfa
-                        aSolutionsList_.getDecisionVariables()[2].toString(), //type
-                        aSolutionsList_.getDecisionVariables()[3].toString(), //dim
-                        aSolutionsList_.getObjective(1), //entropia
-                        aSolutionsList_.getObjective(0) //contraste
-                );
-
-                // execute insert SQL stetement
-                dbConnection = getDBConnection();
-                statement = (Statement) dbConnection.prepareStatement(insertTableSQL);
-
-                Configuration.logger_.info("Record is inserted into DBUSER table!");
-
-                bwE.write(String.valueOf(aSolutionsList_.getObjective(0)));
-                bwS.write(String.valueOf(aSolutionsList_.getObjective(1)));
-                bwP.write(String.valueOf(aSolutionsList_.getObjective(0) * aSolutionsList_.getObjective(1)));
+                bwE.write(String.valueOf(aSolutionsList_.getObjective(0)) + "|"
+                        + String.valueOf(aSolutionsList_.getObjective(1)));
                 bwE.newLine();
-                bwS.newLine();
-                bwP.newLine();
             }
             bwE.close();
-            bwS.close();
-            bwP.close();
-            Configuration.logger_.info("cantidad de registros insertados: " + solutionsList_.size());
+            Configuration.logger_.info("Cargado el archivo OBJETIVO");
         } catch (IOException e) {
             Configuration.logger_.severe("Error acceding to the file");
             e.printStackTrace();
-        } catch (SQLException ex) {
-            Configuration.logger_.severe("Error de insertTableSQL");
-            ex.printStackTrace();
-
         }
     }
 
-    /*public void printVariablesToFile(String path){
-     try {
-     FileOutputStream fos = new FileOutputStream(path);
-     OutputStreamWriter osw = new OutputStreamWriter(fos);
-     BufferedWriter bw = new BufferedWriter(osw);
-     if (size()>0) {
-     int numberOfVariables = solutionsList_.get(0).getDecisionVariables().length;
-     bw.write("X    ----    Y    ----    ClipLimit    ----    Nombre Imagen");
-     bw.newLine();
-     for (Solution aSolutionsList_ : solutionsList_) {
-     for (int j = 0; j < numberOfVariables; j++)
-     bw.write(aSolutionsList_.getDecisionVariables()[j].toString() + "    ----    ");
-     bw.write(aSolutionsList_.getNombreImagenResultado());
-     bw.newLine();
-     }
-     }
-     bw.close();
-     }catch (IOException e) {
-     Configuration.logger_.severe("Error acceding to the file");
-     e.printStackTrace();
-     }
-     }*/
-    public void printVariablesToFile(String path) {
+    public void insertToBD() {
+        Connection dbConnection = null;
+        Statement statement = null;
         try {
-            FileOutputStream fosX = new FileOutputStream("X");
-            FileOutputStream fosY = new FileOutputStream("Y");
-            FileOutputStream fosClip = new FileOutputStream("CLIP");
-            FileOutputStream fosNom = new FileOutputStream("NOM");
-            OutputStreamWriter oswX = new OutputStreamWriter(fosX);
-            OutputStreamWriter oswY = new OutputStreamWriter(fosY);
-            OutputStreamWriter oswClip = new OutputStreamWriter(fosClip);
-            OutputStreamWriter oswNom = new OutputStreamWriter(fosNom);
-            BufferedWriter bwX = new BufferedWriter(oswX);
-            BufferedWriter bwY = new BufferedWriter(oswY);
-            BufferedWriter bwClip = new BufferedWriter(oswClip);
-            BufferedWriter bwNom = new BufferedWriter(oswNom);
-            if (size() > 0) {
-                for (Solution aSolutionsList_ : solutionsList_) {
-                    bwX.write(aSolutionsList_.getDecisionVariables()[0].toString());
-                    bwX.newLine();
-                    bwY.write(aSolutionsList_.getDecisionVariables()[1].toString());
-                    bwY.newLine();
-                    bwClip.write(aSolutionsList_.getDecisionVariables()[2].toString());
-                    bwClip.newLine();
-                    bwNom.write(aSolutionsList_.getNombreImagenResultado());
-                    bwNom.newLine();
-                }
+            Class.forName(Configuration.bdDriver);
+            dbConnection = (Connection) DriverManager.getConnection(Configuration.bdConexion, Configuration.bdUser, Configuration.bdPass);
+            statement = (Statement) dbConnection.createStatement();
+            for (Solution aSolutionsList_ : solutionsList_) {
+                // int n, int m, double alfa, int type, int dim, double entropia, double contraste
+                String insertTableSQL = getSentenciaSQL(
+                        aSolutionsList_.getDecisionVariables()[1].toString(), //n
+                        Configuration.mMax + "", // m
+                        aSolutionsList_.getDecisionVariables()[0].toString(), //alfa
+                        aSolutionsList_.getDecisionVariables()[2].toString(), //type
+                        aSolutionsList_.getDecisionVariables()[3].toString(), //dim
+                        aSolutionsList_.getObjective(1) + "", //entropia
+                        aSolutionsList_.getObjective(0) + "" //contraste
+                );
+                Configuration.logger_.info(insertTableSQL);                
+                statement.executeUpdate(insertTableSQL);
+
             }
-            bwX.close();
-            bwY.close();
-            bwClip.close();
-            bwNom.close();
+            Configuration.logger_.info("cantidad de registros insertados: " + solutionsList_.size());
+            if (statement != null) {
+                statement.close();
+            }
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        } catch (ClassNotFoundException ex) {
+            Configuration.logger_.severe("Error en la conexion con la bd " + ex.getMessage());
+        } catch (SQLException ex) {
+            Configuration.logger_.severe("Error en la conexion con la bd " + ex.getMessage());
+        }
+    }
+
+    public void printVariablesToFile() {
+        try {
+            Configuration.logger_.info("Cargando el archivo VARIABLES...");
+            FileOutputStream fosE = new FileOutputStream("VARIABLES");
+            OutputStreamWriter oswE = new OutputStreamWriter(fosE);
+            BufferedWriter bwE = new BufferedWriter(oswE);
+            for (Solution aSolutionsList_ : solutionsList_) {
+                bwE.write(aSolutionsList_.getDecisionVariables()[1].toString() + "|" + //n
+                        Configuration.mMax + "|" + // m
+                        aSolutionsList_.getDecisionVariables()[0].toString() + "|" + //alfa
+                        aSolutionsList_.getDecisionVariables()[2].toString() + "|" +//type
+                        aSolutionsList_.getDecisionVariables()[3].toString() //dim
+                ); //contraste)
+                bwE.newLine();
+            }
+            bwE.close();
+            Configuration.logger_.info("Cargado el archivo VARIABLES");
         } catch (IOException e) {
             Configuration.logger_.severe("Error acceding to the file");
             e.printStackTrace();
@@ -364,14 +310,10 @@ public class SolutionSet implements Serializable {
         return capacity_;
     }
 
-    private Connection getDBConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private String getSentenciaSQL(String n, String m, String alfa, String type, String dim, double entropia, double contraste) {
+    private String getSentenciaSQL(String n, String m, String alfa, String type, String dim, String entropia, String contraste) {
         String resultado = "INSERT INTO resultados"
-                + "(n, m , alfa, type, dim, entropia, nombre, dominado, nrocorrida) " + "VALUES"
-                + "(" + n + "," + m + "," + alfa + "," + type + "," + dim + "," + entropia + ",'" + Configuration.nombreImagen + "','N',0)";
+                + "(n, m , alfa, type, dim, entropia, contraste, nombre, dominado, nrocorrida) " + "VALUES"
+                + "(" + n + "," + m + "," + alfa + "," + type + "," + dim + "," + entropia + "," + contraste + ",'" + Configuration.nombreImagen + "','N',0)";
         return resultado;
     }
 

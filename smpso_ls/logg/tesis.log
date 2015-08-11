@@ -1,3 +1,172 @@
-2015-08-09 03:57:01 INFO  SMPSOTesis:200 - Empieza: Sun Aug 09 03:57:01 PYT 2015
-2015-08-09 03:57:01 INFO  Tesis:143 - COMANDO MATLAB: [e , c] = testMCLV2('mdb005.pgm',3,5,0.47839998070961365,4,9)
-2015-08-09 03:58:21 ERROR Tesis:59 - error: Object attempting to be received cannot be transferred between Java Virtual Machines
+2015-08-10 09:16:32 INFO  SMPSOTesis:193 - -------------------------------------------------------
+2015-08-10 09:16:32 INFO  SMPSOTesis:194 - Empieza: Mon Aug 10 09:16:32 PYT 2015
+2015-08-10 09:16:32 INFO  SMPSOTesis:195 - STEP 0, iniciar Parametros
+2015-08-10 09:17:05 INFO  SMPSOTesis:193 - -------------------------------------------------------
+2015-08-10 09:17:05 INFO  SMPSOTesis:194 - Empieza: Mon Aug 10 09:17:05 PYT 2015
+2015-08-10 09:17:05 INFO  SMPSOTesis:195 - STEP 0, iniciar Parametros
+2015-08-10 09:17:10 INFO  SMPSOTesis:203 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 09:56:20 INFO  SMPSOTesis:193 - -------------------------------------------------------
+2015-08-10 09:56:20 INFO  SMPSOTesis:194 - Empieza: Mon Aug 10 09:56:20 PYT 2015
+2015-08-10 09:56:20 INFO  SMPSOTesis:195 - STEP 0, iniciar Parametros
+2015-08-10 09:56:25 INFO  SMPSOTesis:203 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 09:56:53 ERROR Tesis:59 - error: Object attempting to be received cannot be transferred between Java Virtual Machines
+2015-08-10 09:57:56 INFO  SMPSOTesis:193 - -------------------------------------------------------
+2015-08-10 09:57:56 INFO  SMPSOTesis:194 - Empieza: Mon Aug 10 09:57:56 PYT 2015
+2015-08-10 09:57:56 INFO  SMPSOTesis:195 - STEP 0, iniciar Parametros
+2015-08-10 09:58:00 INFO  SMPSOTesis:203 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 10:04:56 INFO  SMPSOTesis:193 - -------------------------------------------------------
+2015-08-10 10:04:56 INFO  SMPSOTesis:194 - Empieza: Mon Aug 10 10:04:56 PYT 2015
+2015-08-10 10:04:56 INFO  SMPSOTesis:195 - STEP 0, iniciar Parametros
+2015-08-10 10:05:01 INFO  SMPSOTesis:203 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 10:07:07 INFO  SMPSOTesis:208 - Particula [0] OBJ. contraste:1395.1940241564012, entropia:4.8641278845168285
+2015-08-10 10:07:07 INFO  SMPSOTesis:209 - Particula [0] VARDESC. n:0, m:5, alfa:0.40862608135204603, type:5, dim:9
+2015-08-10 10:39:01 INFO  SMPSOTesis:193 - -------------------------------------------------------
+2015-08-10 10:39:01 INFO  SMPSOTesis:194 - Empieza: Mon Aug 10 10:39:01 PYT 2015
+2015-08-10 10:39:01 INFO  SMPSOTesis:195 - STEP 0, iniciar Parametros
+2015-08-10 10:39:21 INFO  SMPSOTesis:203 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 11:23:27 INFO  SMPSOTesis:208 - Particula [0] OBJ. contraste:1334.59527567688, entropia:4.802482438293518
+2015-08-10 11:23:27 INFO  SMPSOTesis:209 - Particula [0] VARDESC. n:1, m:5, alfa:0.2629222128883278, type:2, dim:8
+2015-08-10 11:52:04 INFO  SMPSOTesis:208 - Particula [1] OBJ. contraste:1318.3178510257533, entropia:4.861254558346832
+2015-08-10 11:52:04 INFO  SMPSOTesis:209 - Particula [1] VARDESC. n:3, m:5, alfa:0.1343126933547751, type:2, dim:7
+2015-08-10 11:56:33 INFO  SMPSOTesis:208 - Particula [2] OBJ. contraste:1359.3413379263416, entropia:4.868086144260664
+2015-08-10 11:56:33 INFO  SMPSOTesis:209 - Particula [2] VARDESC. n:0, m:5, alfa:0.42266368790660225, type:3, dim:1
+2015-08-10 11:58:26 INFO  SMPSOTesis:208 - Particula [3] OBJ. contraste:1303.9804909777458, entropia:4.888498270867407
+2015-08-10 11:58:26 INFO  SMPSOTesis:209 - Particula [3] VARDESC. n:0, m:5, alfa:0.1927002565280067, type:5, dim:9
+2015-08-10 11:59:55 INFO  SMPSOTesis:208 - Particula [4] OBJ. contraste:1279.745908834599, entropia:4.865588772661652
+2015-08-10 11:59:55 INFO  SMPSOTesis:209 - Particula [4] VARDESC. n:0, m:5, alfa:0.22132823697205015, type:5, dim:4
+2015-08-10 11:59:55 INFO  SMPSOTesis:211 - STEP 2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
+2015-08-10 11:59:55 INFO  SMPSOTesis:217 - STEP 4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)
+2015-08-10 11:59:55 INFO  SMPSOTesis:222 - STEP 6. Initialize the memory of each particle, al principio todos son mejores locales
+2015-08-10 11:59:55 INFO  SMPSOTesis:229 - STEP 7. Iteraciones
+2015-08-10 11:59:55 INFO  SMPSOTesis:231 - Particula [0] Mon Aug 10 11:59:55 PYT 2015
+2015-08-10 12:12:00 INFO  SMPSOTesis:243 - Particula [0] OBJ. contraste:1350.295227349941, entropia:4.876485948534657
+2015-08-10 12:12:00 INFO  SMPSOTesis:244 - Particula [0] VARDESC. n:1, m:5, alfa:0.42106107532382064, type:2, dim:4
+2015-08-10 12:19:07 INFO  SMPSOTesis:243 - Particula [1] OBJ. contraste:1277.0584533079161, entropia:4.892872686944747
+2015-08-10 12:19:07 INFO  SMPSOTesis:244 - Particula [1] VARDESC. n:2, m:5, alfa:0.3343126933547751, type:2, dim:3
+2015-08-10 12:21:18 INFO  SMPSOTesis:243 - Particula [2] OBJ. contraste:1255.0067774243887, entropia:4.866496130957114
+2015-08-10 12:21:18 INFO  SMPSOTesis:244 - Particula [2] VARDESC. n:0, m:5, alfa:0.5, type:1, dim:1
+2015-08-10 12:23:08 INFO  SMPSOTesis:243 - Particula [3] OBJ. contraste:1303.9804909777458, entropia:4.888498270867407
+2015-08-10 12:23:08 INFO  SMPSOTesis:244 - Particula [3] VARDESC. n:0, m:5, alfa:0.1927002565280067, type:5, dim:9
+2015-08-10 12:24:36 INFO  SMPSOTesis:243 - Particula [4] OBJ. contraste:1270.2381008929501, entropia:4.8653338325957085
+2015-08-10 12:24:36 INFO  SMPSOTesis:244 - Particula [4] VARDESC. n:0, m:5, alfa:0.17666206801947046, type:5, dim:4
+2015-08-10 12:24:36 INFO  SMPSOTesis:231 - Particula [1] Mon Aug 10 12:24:36 PYT 2015
+2015-08-10 12:37:29 INFO  SMPSOTesis:243 - Particula [0] OBJ. contraste:1372.1230693878967, entropia:4.818327698669406
+2015-08-10 12:37:29 INFO  SMPSOTesis:244 - Particula [0] VARDESC. n:1, m:5, alfa:0.22106107532382063, type:1, dim:8
+2015-08-10 12:37:30 ERROR Tesis:59 - error: Object attempting to be received cannot be transferred between Java Virtual Machines
+2015-08-10 17:37:41 INFO  SMPSOTesis:193 - -------------------------------------------------------
+2015-08-10 17:37:41 INFO  SMPSOTesis:194 - Empieza: Mon Aug 10 17:37:41 PYT 2015
+2015-08-10 17:37:41 INFO  SMPSOTesis:195 - STEP 0, iniciar Parametros
+2015-08-10 17:37:49 INFO  SMPSOTesis:203 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 17:50:57 INFO  SMPSOTesis:208 - Particula [0] OBJ. contraste:1336.2151591377324, entropia:4.853895877520735
+2015-08-10 17:50:57 INFO  SMPSOTesis:209 - Particula [0] VARDESC. n:2, m:5, alfa:0.24941334482413102, type:3, dim:6
+2015-08-10 18:36:45 INFO  SMPSOTesis:208 - Particula [1] OBJ. contraste:1376.5175194780682, entropia:4.701909863653758
+2015-08-10 18:36:45 INFO  SMPSOTesis:209 - Particula [1] VARDESC. n:2, m:5, alfa:0.2027277497617862, type:3, dim:10
+2015-08-10 18:37:33 INFO  SMPSOTesis:208 - Particula [2] OBJ. contraste:1296.1424204181483, entropia:4.902165415329725
+2015-08-10 18:37:33 INFO  SMPSOTesis:209 - Particula [2] VARDESC. n:2, m:5, alfa:0.37911071031422894, type:4, dim:1
+2015-08-10 19:15:50 INFO  SMPSOTesis:208 - Particula [3] OBJ. contraste:1368.2039074312368, entropia:4.7711501003681285
+2015-08-10 19:15:50 INFO  SMPSOTesis:209 - Particula [3] VARDESC. n:3, m:5, alfa:0.12727920069099105, type:3, dim:10
+2015-08-10 19:19:42 INFO  SMPSOTesis:208 - Particula [4] OBJ. contraste:1289.5789743714417, entropia:4.896259415166843
+2015-08-10 19:19:42 INFO  SMPSOTesis:209 - Particula [4] VARDESC. n:2, m:5, alfa:0.22018966823932346, type:3, dim:3
+2015-08-10 19:19:42 INFO  SMPSOTesis:211 - STEP 2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
+2015-08-10 19:19:42 INFO  SMPSOTesis:217 - STEP 4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)
+2015-08-10 19:19:42 INFO  SMPSOTesis:222 - STEP 6. Initialize the memory of each particle, al principio todos son mejores locales
+2015-08-10 19:19:42 INFO  SMPSOTesis:229 - STEP 7. Iteraciones
+2015-08-10 19:19:42 INFO  SMPSOTesis:231 - Particula [0] Mon Aug 10 19:19:42 PYT 2015
+2015-08-10 20:27:29 INFO  SMPSOTesis:243 - Particula [0] OBJ. contraste:1318.2251533381896, entropia:4.836449077976802
+2015-08-10 20:27:29 INFO  SMPSOTesis:244 - Particula [0] VARDESC. n:2, m:5, alfa:0.16124446080547272, type:2, dim:9
+2015-08-10 21:15:13 INFO  SMPSOTesis:243 - Particula [1] OBJ. contraste:1376.5175194780682, entropia:4.701909863653758
+2015-08-10 21:15:13 INFO  SMPSOTesis:244 - Particula [1] VARDESC. n:2, m:5, alfa:0.2027277497617862, type:3, dim:10
+2015-08-10 21:16:01 INFO  SMPSOTesis:243 - Particula [2] OBJ. contraste:1296.1424204181483, entropia:4.902165415329725
+2015-08-10 21:16:01 INFO  SMPSOTesis:244 - Particula [2] VARDESC. n:2, m:5, alfa:0.4323732740290064, type:4, dim:1
+2015-08-10 21:38:36 INFO  SMPSOTesis:243 - Particula [3] OBJ. contraste:1367.649620561495, entropia:4.796422604154779
+2015-08-10 21:38:36 INFO  SMPSOTesis:244 - Particula [3] VARDESC. n:3, m:5, alfa:0.2160890152810319, type:3, dim:8
+2015-08-10 22:05:14 INFO  SMPSOTesis:243 - Particula [4] OBJ. contraste:1346.6783779187824, entropia:4.77732161472598
+2015-08-10 22:05:14 INFO  SMPSOTesis:244 - Particula [4] VARDESC. n:2, m:5, alfa:0.1960371531332265, type:3, dim:7
+2015-08-10 22:05:14 INFO  SMPSOTesis:231 - Particula [1] Mon Aug 10 22:05:14 PYT 2015
+2015-08-10 22:27:15 INFO  SMPSOTesis_main:36 - EJECUTAR EL PSO
+2015-08-10 22:27:15 INFO  SMPSOTesis:194 - -------------------------------------------------------
+2015-08-10 22:27:15 INFO  SMPSOTesis:195 - Empieza: Mon Aug 10 22:27:15 PYT 2015
+2015-08-10 22:27:15 INFO  SMPSOTesis:196 - STEP 0, iniciar Parametros
+2015-08-10 22:27:20 INFO  SMPSOTesis:204 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 22:28:30 INFO  SMPSOTesis:209 - Particula [0 de 3] OBJ. contraste:330.60612201987834, entropia:4.015476905781786 VARDESC. n:0, m:4, alfa:0.1851345580300593, type:1, dim:6
+2015-08-10 22:29:30 INFO  SMPSOTesis:209 - Particula [1 de 3] OBJ. contraste:335.507583560881, entropia:4.009656974867604 VARDESC. n:0, m:4, alfa:0.23379449346412207, type:1, dim:4
+2015-08-10 22:32:47 INFO  SMPSOTesis:209 - Particula [2 de 3] OBJ. contraste:288.5828489680847, entropia:3.936438109668576 VARDESC. n:0, m:4, alfa:0.44628032439630483, type:1, dim:9
+2015-08-10 22:32:47 INFO  SMPSOTesis:211 - STEP 2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
+2015-08-10 22:32:47 INFO  SMPSOTesis:217 - STEP 4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)
+2015-08-10 22:32:47 INFO  SMPSOTesis:222 - STEP 6. Initialize the memory of each particle, al principio todos son mejores locales
+2015-08-10 22:32:47 INFO  SMPSOTesis:229 - STEP 7. Iteraciones
+2015-08-10 22:32:47 INFO  SMPSOTesis:231 - Iteracion [0 de 2] Mon Aug 10 22:32:47 PYT 2015
+2015-08-10 22:33:49 INFO  SMPSOTesis:243 - Particula [0 de 3] OBJ. contraste:337.9779558159877, entropia:4.011281305110375 VARDESC. n:0, m:4, alfa:0.2202389181321105, type:1, dim:5
+2015-08-10 22:34:50 INFO  SMPSOTesis:243 - Particula [1 de 3] OBJ. contraste:335.507583560881, entropia:4.009656974867604 VARDESC. n:0, m:4, alfa:0.23379449346412207, type:1, dim:4
+2015-08-10 22:35:54 INFO  SMPSOTesis:243 - Particula [2 de 3] OBJ. contraste:332.58224784261654, entropia:4.014686373154914 VARDESC. n:0, m:4, alfa:0.24628032439630482, type:1, dim:5
+2015-08-10 22:35:54 INFO  SMPSOTesis:231 - Iteracion [1 de 2] Mon Aug 10 22:35:54 PYT 2015
+2015-08-10 22:37:01 INFO  SMPSOTesis:243 - Particula [0 de 3] OBJ. contraste:335.9960942609029, entropia:4.014504761401541 VARDESC. n:0, m:4, alfa:0.13483593135540972, type:1, dim:6
+2015-08-10 22:38:02 INFO  SMPSOTesis:243 - Particula [1 de 3] OBJ. contraste:334.52560075375675, entropia:4.010165289947394 VARDESC. n:0, m:4, alfa:0.23975468405438313, type:1, dim:4
+2015-08-10 22:41:19 INFO  SMPSOTesis:243 - Particula [2 de 3] OBJ. contraste:288.5828489680847, entropia:3.936438109668576 VARDESC. n:0, m:4, alfa:0.44628032439630483, type:1, dim:9
+2015-08-10 22:41:19 INFO  SMPSOTesis:262 - -------------------------------------------------------
+2015-08-10 22:41:19 INFO  SMPSOTesis_main:39 - FIN DEL PSO
+2015-08-10 22:41:19 INFO  SMPSOTesis_main:40 - Tiempo total: 843805 ms
+2015-08-10 22:41:19 INFO  SMPSOTesis_main:41 - Objectives values have been writen to file FUN
+2015-08-10 22:56:23 INFO  SMPSOTesis_main:36 - EJECUTAR EL PSO
+2015-08-10 22:56:23 INFO  SMPSOTesis:194 - -------------------------------------------------------
+2015-08-10 22:56:23 INFO  SMPSOTesis:195 - Empieza: Mon Aug 10 22:56:23 PYT 2015
+2015-08-10 22:56:23 INFO  SMPSOTesis:196 - STEP 0, iniciar Parametros
+2015-08-10 22:56:29 INFO  SMPSOTesis:204 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 22:57:07 INFO  SMPSOTesis_main:36 - EJECUTAR EL PSO
+2015-08-10 22:57:07 INFO  SMPSOTesis:194 - -------------------------------------------------------
+2015-08-10 22:57:07 INFO  SMPSOTesis:195 - Empieza: Mon Aug 10 22:57:07 PYT 2015
+2015-08-10 22:57:07 INFO  SMPSOTesis:196 - STEP 0, iniciar Parametros
+2015-08-10 22:57:13 INFO  SMPSOTesis:204 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 22:57:35 INFO  SMPSOTesis:209 - Particula [0 de 2] OBJ. contraste:334.87294901653706, entropia:3.9918580212075048 VARDESC. n:0, m:3, alfa:0.3860382073316828, type:5, dim:8
+2015-08-10 22:57:53 INFO  SMPSOTesis:209 - Particula [1 de 2] OBJ. contraste:331.5863349077561, entropia:4.0028299666317375 VARDESC. n:0, m:3, alfa:0.19293314382754773, type:1, dim:3
+2015-08-10 22:57:53 INFO  SMPSOTesis:211 - STEP 2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
+2015-08-10 22:57:53 INFO  SMPSOTesis:217 - STEP 4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)
+2015-08-10 22:57:54 INFO  SMPSOTesis:222 - STEP 6. Initialize the memory of each particle, al principio todos son mejores locales
+2015-08-10 22:57:54 INFO  SMPSOTesis:229 - STEP 7. Iteraciones
+2015-08-10 22:57:54 INFO  SMPSOTesis:231 - Iteracion [0 de 1] Mon Aug 10 22:57:54 PYT 2015
+2015-08-10 22:59:25 INFO  SMPSOTesis:243 - Particula [0 de 2] OBJ. contraste:333.0609903013231, entropia:4.016608789031334 VARDESC. n:0, m:3, alfa:0.2990633359498652, type:3, dim:6
+2015-08-10 22:59:42 INFO  SMPSOTesis:243 - Particula [1 de 2] OBJ. contraste:331.07675670816496, entropia:4.03348052609453 VARDESC. n:0, m:3, alfa:0.1, type:1, dim:1
+2015-08-10 22:59:42 INFO  SMPSOTesis:262 - -------------------------------------------------------
+2015-08-10 22:59:42 INFO  SMPSOTesis_main:39 - FIN DEL PSO
+2015-08-10 22:59:42 INFO  SMPSOTesis_main:40 - Tiempo total: 155521 ms
+2015-08-10 22:59:42 INFO  SMPSOTesis_main:41 - Objectives values have been writen to file FUN
+2015-08-10 23:17:21 INFO  SMPSOTesis_main:36 - EJECUTAR EL PSO
+2015-08-10 23:17:21 INFO  SMPSOTesis:194 - -------------------------------------------------------
+2015-08-10 23:17:21 INFO  SMPSOTesis:195 - Empieza: Mon Aug 10 23:17:21 PYT 2015
+2015-08-10 23:17:21 INFO  SMPSOTesis:196 - STEP 0, iniciar Parametros
+2015-08-10 23:17:26 INFO  SMPSOTesis:204 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 23:17:40 INFO  SMPSOTesis:209 - Particula [0 de 2] OBJ. contraste:326.4559204758943, entropia:3.995869208542025 VARDESC. n:0, m:3, alfa:0.4824984069804995, type:5, dim:2
+2015-08-10 23:18:14 INFO  SMPSOTesis:209 - Particula [1 de 2] OBJ. contraste:337.47556712685554, entropia:4.005742669925655 VARDESC. n:0, m:3, alfa:0.2319662618911436, type:3, dim:3
+2015-08-10 23:18:14 INFO  SMPSOTesis:211 - STEP 2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
+2015-08-10 23:18:14 INFO  SMPSOTesis:217 - STEP 4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)
+2015-08-10 23:18:14 INFO  SMPSOTesis:222 - STEP 6. Initialize the memory of each particle, al principio todos son mejores locales
+2015-08-10 23:18:14 INFO  SMPSOTesis:229 - STEP 7. Iteraciones
+2015-08-10 23:18:14 INFO  SMPSOTesis:231 - Iteracion [0 de 1] Mon Aug 10 23:18:14 PYT 2015
+2015-08-10 23:18:31 INFO  SMPSOTesis:243 - Particula [0 de 2] OBJ. contraste:334.71149470978276, entropia:4.00061445206647 VARDESC. n:0, m:3, alfa:0.5, type:5, dim:2
+2015-08-10 23:19:06 INFO  SMPSOTesis:243 - Particula [1 de 2] OBJ. contraste:337.47556712685554, entropia:4.005742669925655 VARDESC. n:0, m:3, alfa:0.2319662618911436, type:3, dim:3
+2015-08-10 23:19:06 INFO  SMPSOTesis:262 - -------------------------------------------------------
+2015-08-10 23:19:06 INFO  SMPSOTesis_main:39 - FIN DEL PSO
+2015-08-10 23:19:06 INFO  SMPSOTesis_main:40 - Tiempo total: 105548 ms
+2015-08-10 23:19:06 INFO  SMPSOTesis_main:41 - Objectives values have been writen to file FUN
+2015-08-10 23:19:07 INFO  SMPSOTesis_main:44 - Variables values have been writen to file VAR
+2015-08-10 23:19:07 INFO  SMPSOTesis_main:46 - END!!!!!
+2015-08-10 23:49:23 INFO  SMPSOTesis_main:36 - EJECUTAR EL PSO
+2015-08-10 23:49:23 INFO  SMPSOTesis:194 - -------------------------------------------------------
+2015-08-10 23:49:23 INFO  SMPSOTesis:195 - Empieza: Mon Aug 10 23:49:23 PYT 2015
+2015-08-10 23:49:23 INFO  SMPSOTesis:196 - STEP 0, iniciar Parametros
+2015-08-10 23:49:27 INFO  SMPSOTesis:204 - STEP 1 (and 3) poblacion inicial, creamos cada una de las particulas con un valor aleatorio para cada una
+2015-08-10 23:49:41 INFO  SMPSOTesis:209 - Particula [0 de 2] OBJ. contraste:334.98890302127904, entropia:4.002177972593234 VARDESC. n:1, m:3, alfa:0.268496344809959, type:4, dim:8
+2015-08-10 23:51:14 INFO  SMPSOTesis:209 - Particula [1 de 2] OBJ. contraste:332.58139726544744, entropia:4.004970674358358 VARDESC. n:0, m:3, alfa:0.39233302240401147, type:3, dim:6
+2015-08-10 23:51:14 INFO  SMPSOTesis:211 - STEP 2. iniciar velocidad de cada particula a 0. Matriz cantidad de particulas x cantidad de variables
+2015-08-10 23:51:14 INFO  SMPSOTesis:217 - STEP 4 and 5. lideres iniciales. archivo de global best inicial, solo entraran los dominantes (minimizacion es este problema, por lo tanto solo entran los que son menores en valor)
+2015-08-10 23:51:14 INFO  SMPSOTesis:222 - STEP 6. Initialize the memory of each particle, al principio todos son mejores locales
+2015-08-10 23:51:14 INFO  SMPSOTesis:229 - STEP 7. Iteraciones
+2015-08-10 23:51:14 INFO  SMPSOTesis:231 - Iteracion [0 de 1] Mon Aug 10 23:51:14 PYT 2015
+2015-08-10 23:54:17 INFO  SMPSOTesis:243 - Particula [0 de 2] OBJ. contraste:332.490965830895, entropia:4.006036964817984 VARDESC. n:0, m:3, alfa:0.43963202215701147, type:2, dim:6
+2015-08-10 23:55:49 INFO  SMPSOTesis:243 - Particula [1 de 2] OBJ. contraste:332.58139726544744, entropia:4.004970674358358 VARDESC. n:0, m:3, alfa:0.39233302240401147, type:3, dim:6
+2015-08-10 23:55:49 INFO  SMPSOTesis:262 - -------------------------------------------------------
+2015-08-10 23:55:49 INFO  SMPSOTesis_main:39 - FIN DEL PSO
+2015-08-10 23:55:49 INFO  SMPSOTesis_main:40 - Tiempo total: 386753 ms
+2015-08-10 23:55:49 INFO  SMPSOTesis_main:41 - Objectives values have been writen to file FUN
+2015-08-10 23:55:50 INFO  SMPSOTesis_main:44 - Variables values have been writen to file VAR
+2015-08-10 23:55:50 INFO  SMPSOTesis_main:46 - END!!!!!
